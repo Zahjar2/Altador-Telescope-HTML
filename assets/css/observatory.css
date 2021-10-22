@@ -1,0 +1,619 @@
+#telescope-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+}
+
+#telescope-outer {
+  position: absolute;
+  pointer-events: none;
+  left: 0; /* WHY */
+}
+
+#telescope-ring {
+  position: absolute;
+  border-radius: 100%;
+  pointer-events: none;
+  margin: calc(51px/2);
+  left: 0; /* WHY */
+}
+
+
+.hair {
+  position: absolute;
+  background-color: rgba(255, 0, 0, .5);
+  pointer-events: none;
+}
+
+#crosshair-h {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+}
+
+#crosshair-v {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+}
+
+#options-button-container {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 85px;
+  height: 103px;
+}
+
+#button-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#button-area {
+  position: absolute;
+  outline: 1px solid green;
+  outline-offset: -1px;
+  width: 32px;
+  height: 34px;
+  left: 22px;
+}
+
+#button-area:hover {
+  outline: 1px solid red;
+  cursor: url("../img/cursor.png"), auto;
+}
+
+#scroll-container,
+#scroll-top,
+#scroll-middle,
+#scroll-middle-content,
+#scroll-bottom {
+  position: absolute;
+  outline: 1px solid green;
+  outline-offset: -1px;
+}
+
+#scroll-container {
+  position: absolute;
+  top: 39px;
+  left: 57px;
+}
+
+#scroll-top,
+#scroll-middle,
+#scroll-middle-content,
+#scroll-bottom {
+  display: none;
+  outline-color: red;
+}
+
+#scroll-middle-content {
+  position: relative;
+  top: 22px;
+  left: -7px;
+}
+
+#scroll-bottom {
+  top: 12px;
+}
+
+#scroll-container {
+  width: 190px;
+  height: 211px;
+}
+
+#scroll-container,
+#scroll-container>* {
+  display: none;
+}
+
+/*
+  Always show the top and bottom scroll (hidden by rule above)
+*/
+#scroll-top,
+#scroll-bottom {
+  display: block!important;
+}
+
+#scroll-container:hover {
+  cursor: url("../img/cursor.png"), auto;
+}
+
+/*
+  Then, when moving to the scroll show all 3 (open the scroll)
+*/
+#scroll-container:hover #scroll-top,
+#scroll-container:hover #scroll-middle,
+#scroll-container:hover #scroll-middle-content,
+#scroll-container:hover #scroll-bottom {
+  display: block;
+}
+
+/*
+  And move the bottom scroll downwards
+*/
+#scroll-container:hover #scroll-bottom {
+  top: 155px;
+  left: 17px;
+}
+
+#options-list {
+  position: absolute;
+  list-style: none;
+  font-family: algerian;
+  padding-left: 0;
+}
+
+#options-list li {
+  background-repeat: no-repeat;
+  line-height: 23px;
+  padding-left: 23px;
+  text-align: left;
+  margin-block: 5.5px;
+  margin-left: 10px;
+  background-position-x: 3px;
+  background-position-y: center;
+  font-size: 14px;
+  color: #000066;
+}
+
+#option-add {
+  margin-left: calc(10px + 3px)!important;
+  background-image: url('../img/add_star.png');
+}
+#option-add:hover {
+  background-position-x: 0px;
+  background-image: url('../img/add_star_big.png');
+  cursor: url("../img/cursor_red.png"), auto;
+}
+
+#option-connect {
+  margin-left: calc(10px + 0px)!important;
+  background-image: url('../img/add_line.png');
+}
+#option-connect:hover {
+  background-position-x: 0px;
+  background-image: url('../img/add_line_big.png');
+  cursor: url("../img/cursor_red.png"), auto;
+}
+
+#option-delete {
+  margin-left: calc(10px + 3px)!important;
+  background-image: url('../img/delete_star.png');
+}
+#option-delete:hover {
+  background-position-x: 0px;
+  background-image: url('../img/delete_star_big.png');
+  cursor: url("../img/cursor_red.png"), auto;
+}
+
+#option-delete-all {
+  margin-left: calc(10px + 11px)!important;
+  background-image: url('../img/delete_all.png');
+}
+#option-delete-all:hover {
+  background-position-x: 0px;
+  background-image: url('../img/delete_all_big.png');
+  cursor: url("../img/cursor_red.png"), auto;
+}
+
+#stars {
+  /*
+    On top of each other
+  */
+  position: absolute;
+  /*
+    With 1000,1000 at the center of the telescope (500px wide)
+    there's 250px of extra background on each side and meaningless stars to show.
+  */
+  width: 2500px;
+  height: 2500px;
+
+  /*
+    Start at the center (0,0)
+  */
+  margin-top: -1000px;
+  margin-left: -1000px;
+  background-image: url("../img/stars_bg.png");
+  /*
+    Just esthetic, so the background is as similar as the one shown with flash
+  */
+  background-position-x: calc(-250px - (87px/2));
+  background-position-y: calc(250px + (87px/2));
+  background-position-x: -250px;
+  background-position-y: 250px;
+}
+
+.star {
+  position: absolute;
+  border-radius: 100%;
+  width: 4px;
+  height: 4px;
+  transform: translate(-50%, -50%);
+}
+
+.star:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.overlay {
+  display: none;
+  position: absolute;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(107 214 255 / 40%);
+  transform: translate(-50%, -50%);
+  color: white;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.small-overlay {
+  display: none;
+  position: absolute;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.overlay span {
+  margin-top: -33px;
+}
+
+.star:hover~.overlay {
+  display: flex;
+}
+
+.star.selected~.small-overlay {
+  display: block;
+  background-color: rgb(192 0 255 / 40%);
+}
+
+.star.solved~.small-overlay {
+  display: block;
+  background-color: rgb(85 119 255 / 40%);
+}
+
+.star.white {
+  background-color: #FFFFFF;
+}
+
+.star.white-sm {
+  width: 3px;
+  height: 3px;
+  background-color: #FFFFFF;
+}
+
+.star.yellow {
+  background-color: #F8FF96;
+}
+
+.star.blue {
+  background-color: #A5CDFF;
+}
+
+.star.red {
+  background-color: #FF7F7F;
+  width: 6px;
+  height: 6px;
+}
+
+.star.purple {
+  background-color: #BB5BD8;
+}
+
+.line {
+  position: absolute;
+  height: 1px;
+  background-color: white;
+  transform-origin: left;
+}
+
+.line.active {
+  background-color: #FF00FF;
+}
+
+.constellation-overlay {
+  position: absolute;
+}
+
+#telescope-container.select_star:hover {
+  cursor: url("../img/finger.png"), auto!important;
+}
+
+#telescope-container.select_line:hover {
+  cursor: url("../img/pen.png"), auto!important;
+}
+
+#telescope-container.select_delete:hover {
+  cursor: url("../img/eraser.png"), auto!important;
+}
+
+#telescope-container:hover {
+  cursor: url("../img/cursor.png"), auto;
+}
+
+.star.selected {
+  background-color: #FF00FF;
+}
+.line.selected {
+  background-color: #FF00FF;
+}
+
+.star.solved {
+  background-color: #5577FF;
+}
+
+.line.solved {
+  background-color: #0000EF;
+}
+
+#submit-popup-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 125px;
+  height: 125px;
+}
+
+#submit-popup-container > * {
+  position: absolute;
+  display: none;
+}
+
+#submit-popup-container.show > * {
+  display: block;
+}
+
+#submit-popup-panel {
+  position: absolute;
+  margin: 0;
+  font-family: 'algerian';
+  color: white;
+  width: 119px;
+  height: 67px;
+  line-height: 67px;
+  font-size: 15px;
+  background-image: url("../img/submit_panel.png");
+}
+
+#submit-popup-container>#submit-popup-arm-small {
+  opacity: 0;
+  transform: rotate(-260deg);
+  transform-origin: top right;
+  transition: all .21s;
+}
+
+#submit-popup-container>#submit-popup-arm-big {
+  opacity: 0;
+  transform: rotate(-160deg);
+  transform-origin: top left;
+  transition: all .21s;
+}
+
+#submit-popup-container>#submit-popup-panel {
+  opacity: 0;
+  transform: rotate(-140deg);
+  transform-origin: top left;
+  transition: all .21s;
+}
+
+#submit-popup-container.show>#submit-popup-arm-small {
+  opacity: 1;
+  transform: rotate(0deg) translate(-30px, 2px);
+  transform: rotate(0deg) translate(20px, 2px);
+  transform-origin: top right;
+}
+
+#submit-popup-container.show>#submit-popup-arm-big {
+  opacity: 1;
+  transform: rotate(0deg) translate(-40px, 20px);
+  transform: rotate(0deg) translate(10px, 20px);
+  transform-origin: top left;
+}
+
+#submit-popup-container.show>#submit-popup-panel {
+  opacity: 1;
+  transform: rotate(0deg) translate(-60px, 53px);
+  transform: rotate(0deg) translate(0px, 53px);
+  transform-origin: top left;
+}
+
+#submit-popup-panel:hover {
+  cursor: url("../img/cursor_red.png"), auto!important;
+}
+
+#current-coords-container {
+  pointer-events: none;
+  position: absolute;
+  height: 113px;
+  width: 108px;
+  bottom: 2px;
+  right: 4px;
+}
+
+#current-coords-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#current-coords-text {
+  position: absolute;
+  width: 71px;
+  margin: 0;
+  color: white;
+  bottom: 21px;
+  right: 20px;
+  font-family: arial_25;
+  font-size: 13px;
+}
+
+#scroll-popup-container {
+  display: none;
+  position: absolute;
+  height: 269px;
+  width: 247px;
+  left: 25%;
+  top: 25%;
+  background-image: url(../img/scroll_popup.png);
+}
+
+#scroll-popup-container.show {
+  display: block;
+}
+
+.scroll-popup-text {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding-block: 29px;
+  padding-inline: 20px;
+  box-sizing: border-box;
+  font-family: algerian;
+  font-size: 16px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.scroll-popup-text.checking.show {
+  display: flex;
+}
+
+.scroll-popup-text.error.show {
+  display: flex;
+}
+
+.scroll-popup-text.success.show {
+  display: flex;
+}
+
+.scroll-popup-text-bottom {
+  color: #0000EF;
+}
+
+.scroll-popup-text-bottom:hover {
+  cursor: url("../img/cursor_red.png"), auto;
+}
+
+#tooltip {
+  position: absolute;
+  white-space: nowrap;
+  display: none;
+  background: #ffffcc;
+  border: 1px solid black;
+  padding: 5px;
+  color: black;
+}
+
+@font-face {
+  font-family: algerian;
+  src: url('../fonts/algerian.ttf');
+}
+
+@font-face {
+  font-family: arial_25;
+  src: url('../fonts/arial_25.ttf');
+}
+
+@font-face {
+  font-family: arial_102;
+  src: url('../fonts/arial_102.ttf');
+}
+
+/*
+ * z-index DECLARATIONS
+ *
+ *
+*/
+
+#telescope-container {
+  z-index: 100;
+}
+
+#stars {
+  z-index: 20;
+}
+
+.star {
+  z-index: 30;
+}
+
+.overlay {
+  z-index: 40;
+}
+
+.constellation-overlay {
+  z-index: 45;
+}
+
+.hair {
+  z-index: 50;
+}
+
+#telescope-outer {
+  z-index: 60;
+}
+
+#current-coords {
+  z-index: 70;
+}
+
+#options-button-container {
+  z-index: 70;
+}
+
+#submit-popup-container {
+  z-index: 70;
+}
+
+#current-coords-container {
+  z-index: 70;
+}
+
+#scroll-popup-container {
+  z-index: 70;
+}
+
+#telescope-ring {
+  z-index: 80;
+}
+
+#scroll-container,
+#scroll-container * {
+  z-index: 90;
+}
+
+#button-area {
+  z-index: 100;
+}
+
+#tooltip {
+  z-index: 1000;
+}
+
+/*
+ * Scroll z-index
+ *
+*/
+
+#scroll-bottom {
+  z-index: 80!important;
+}
+
+#scroll-container:hover #scroll-bottom {
+  z-index: 90!important;
+}
+
+#scroll-container:hover > #scroll-middle-content div {
+  z-index: 90;
+}
