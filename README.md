@@ -38,3 +38,16 @@ I don't know how it would go on MacOS or Linux.
 --------------------
 
 On assets/js/unsued/ is javascript from when I first tried using canvas, I couldn't figure it out. Feel free to ignore.
+
+--------------------
+
+# Comparison between Flash and HTML
+
+![Comparison GIF](/near_perfect_stars_positions.gif?raw=true "Comparison between Flash and HTML")
+
+--------------------
+
+# Showcase Video
+
+https://user-images.githubusercontent.com/92926549/138456055-6f1a8e9e-e7f0-4915-9fc3-b6981609ba5d.mp4
+
